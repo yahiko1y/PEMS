@@ -1,0 +1,7 @@
+features to be added are 
+1. add revenue
+2. add expense
+3. Reports
+4. reciept reading
+5. Ai powered suggestions
+6. Authentication (Log in)
