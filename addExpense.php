@@ -23,7 +23,7 @@
                     <h1>Expense Form</h1>
                     <form >
                     <div class="form-group">
-                        <label for="price">Name:</label>
+                        <label for="price">Name yes:</label>
                         <input type="text" class="form-control" id="price" name="price" required>
                       </div>
                       <div class="form-group">
