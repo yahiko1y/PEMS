@@ -1,7 +1,8 @@
 features to be added are 
-1. add revenue
-2. add expense
-3. Reports
-4. reciept reading
-5. Ai powered suggestions
+1. add expense(+easily navagatable Recurring expenses)
+2. add revenue
+3. Reports(goals, charts)
+4. reciept reading (Using OCR api)
+5. optimization suggestions (budgeting tips, cost savings).
 6. Authentication (Log in)
+7. turn it into a mobile app (Using app shell technology)
