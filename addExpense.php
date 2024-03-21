@@ -21,18 +21,18 @@
                 </div>
                 <div class="container exp">
                     <h1>Expense Form</h1>
-                    <form >
+                    <form action='do.php' method="post">
                     <div class="form-group">
-                        <label for="price">Name yes:</label>
-                        <input type="text" class="form-control" id="price" name="price" required>
+                        <label for="price">Name:</label>
+                        <input type="text" class="form-control" id="price" name="name" value="test" required>
                       </div>
                       <div class="form-group">
                         <label for="price">Price:</label>
-                        <input type="number" class="form-control" id="price" name="price" required>
+                        <input type="number" class="form-control" id="price" name="price" value=21 required>
                       </div>
                       <div class="form-group">
                         <label for="date">Date:</label>
-                        <input type="date" class="form-control" id="date" name="date" required>
+                        <input type="date" class="form-control" id="date" name="date" >
                       </div>
                       <div class="form-group">
                           Click here if it a reccuring exepnse: <input type="checkbox" name="reccuring"> 
@@ -57,7 +57,7 @@
                         </div>
                        
                       </div>
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <input type="submit" class="btn btn-primary">
                     </form>
                   </div>
             </main>
@@ -72,8 +72,3 @@
 
 </html>
 
-<?php
-// index.php
-include 'connection.php';
-
-?>
