@@ -35,7 +35,7 @@
                         <input type="date" class="form-control" id="date" name="date" >
                       </div>
                       <div class="form-group">
-                          Click here if it a reccuring exepnse: <input type="checkbox" name="reccuring"> 
+                          Click here if it a reccuring exepnse: <input type="checkbox" name="r" value=1 default=0> 
                         </div>
                       <div class="form-group">
                         <label>Expense Type:</label>
