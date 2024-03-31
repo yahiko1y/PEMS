@@ -1,3 +1,28 @@
+<?php
+
+
+include 'connectDB.php';
+
+    // Fetch the data from the database
+    $sql = "SELECT DISTINCT exp_type FROM expense";
+    $stmt = $conn->query($sql);
+
+    // Store the data in an array
+    $dis = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql2= "SELECT exp_type, SUM(price) AS total FROM expense GROUP BY exp_type; ";
+
+    $stmt2 = $conn->query($sql2);
+
+    // Store the data in an array
+    $exp = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+   
+  
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,21 +55,50 @@
                 </div>
                 <div class="container">
                 <div>
-  <canvas id="myChart"></canvas>
+  <canvas id="myChart" width = 100 length = 100></canvas>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+
+let type =[]
+let total = []
+
+            // Make an AJAX request to fetch_data.php
+            var exp = <?php echo json_encode($exp); ?>;
+            exp.forEach(function (params) {
+              console.log(params.exp_type)
+              type.push(params.exp_type)
+              total.push(params.total)
+
+            })
+
+            console.log(type); 
+            console.log(total); 
+        
+   
+
   const ctx = document.getElementById('myChart');
+ 
 
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: type,
       datasets: [{
         label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        data: total,
+         backgroundColor: [
+      'rgba(255, 99, 132, 0.6)',
+      'rgba(255, 159, 64, 0.6)',
+      'rgba(255, 205, 86, 0.6)'
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)'
+    ],
         borderWidth: 1
       }]
     },
@@ -57,14 +111,15 @@
     }
   });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
                   </div>
             </main>
         </div>
     </div>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
+  
     <script src="script.js"></script>
 </body>
 
