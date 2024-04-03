@@ -9,7 +9,19 @@
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
+    background-color: #ab47;
     
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 h3 {
@@ -63,7 +75,7 @@ li {
     width: 100%;
     overflow: hidden;
     transition: all 0.35s ease-in-out;
-    background-color: #007fff;
+    background-color: #ab47;
 }
 
 .sidebar-logo {

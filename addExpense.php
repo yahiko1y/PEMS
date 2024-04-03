@@ -1,9 +1,33 @@
+<?php
+
+
+include 'connectDB.php';
+
+    // Fetch the data from the database
+    $sql = "SELECT * FROM expense";
+    $stmt = $conn->query($sql);
+
+    // Store the data in an array
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  
+   
+  
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <?php include 'header.php';?>
 
 <body>
+
+<script>
+
+  var test = <?php echo json_encode($rows); ?>;
+
+  console.log(test);
+</script>
 <?php include 'sidebar.php';?>
         <!-- Main Component -->
         <div class="main">
@@ -14,14 +38,16 @@
                 </button>
             </nav>
             <main class="content px-3 py-2">
-                <div class="container-fluid">
-                    <div class="mb-3">
-                        <h3>Add revenue</h3>
-                    </div>
-                </div>
-                <div class="container exp">
+        <div class="container-fluid">
+            <div class="mb-3">
+                <h3>Add revenue</h3>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
                     <h1>Expense Form</h1>
-                    <form action='do.php' method="post">
+                    <form action="do.php" method="post">
                     <div class="form-group">
                         <label for="price">Name:</label>
                         <input type="text" class="form-control" id="price" name="name" value="test" required>
@@ -35,7 +61,7 @@
                         <input type="date" class="form-control" id="date" name="date" >
                       </div>
                       <div class="form-group">
-                          Click here if it a reccuring exepnse: <input type="checkbox" name="r" value=1 default=0> 
+                          Add to reccuring expense: <input type="checkbox" name="r" value=1 default=0> 
                         </div>
                       <div class="form-group">
                         <label>Expense Type:</label>
@@ -59,8 +85,36 @@
                       </div>
                       <input type="submit" class="btn btn-primary">
                     </form>
-                  </div>
-            </main>
+                </div>
+                <div class="col-md-6">
+                    <h1>reccuring expenses</h1>
+                    <h1>Data Table</h1>
+    <table>
+        <tr>
+            
+            <th>Name</th>
+            <th>Price</th>
+            <th>Expense Type</th>
+        </tr>
+        <?php
+        // Iterate over the rows and display the data in the table
+        if (!empty($rows)) {
+            foreach ($rows as $row) {
+                echo "<tr>";
+                echo "<td>" . $row["exp"] . "</td>";
+                echo "<td>" . $row["price"] . "</td>";
+                echo "<td>" . $row["exp_type"] . "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6'>No data available</td></tr>";
+        }
+        ?>
+    </table>
+                </div>
+            </div>
+        </div>
+    </main>
         </div>
     </div>
     

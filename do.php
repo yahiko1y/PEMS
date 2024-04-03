@@ -23,7 +23,7 @@ $stmt->execute();
 echo"Data Added succefully ";
 
 echo "<script>";
-echo "setTimeout(function(){ window.location.href = 'addExpense.php' }, 3000);"; 
+echo "setTimeout(function(){ window.location.href = 'addExpense.php' }, 1500);"; 
 echo "</script>";
 ?>
 

@@ -55,7 +55,9 @@ include 'connectDB.php';
                 </div>
                 <div class="container">
                 <div>
-  <canvas id="myChart" width = 100 length = 100></canvas>
+  <div class="chart-container" style="position: relative; height:50vh; width:100vw">
+    <canvas id="myChart"></canvas>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -87,7 +89,7 @@ let total = []
     data: {
       labels: type,
       datasets: [{
-        label: '# of Votes',
+        label: 'Cost of Each of the categories',
         data: total,
          backgroundColor: [
       'rgba(255, 99, 132, 0.6)',
