@@ -4,7 +4,7 @@
 include 'connectDB.php';
 
     // Fetch the data from the database
-    $sql = "SELECT * FROM expense";
+    $sql = "SELECT * FROM `expense` where is_recurring = 1";
     $stmt = $conn->query($sql);
 
     // Store the data in an array
@@ -114,6 +114,45 @@ include 'connectDB.php';
                 </div>
             </div>
         </div>
+
+        <form onsubmit="mindeeSubmit(event)" >
+    <input type="file" id="my-file-input" name="file" />
+    <input type="submit" />
+</form>
+<div id="valuecontainer"></div>
+<div id="catcontainer"></div>
+<script type="text/javascript">
+
+    const mindeeSubmit = (evt) => {
+        evt.preventDefault()
+        let myFileInput = document.getElementById('my-file-input');
+        let myFile = myFileInput.files[0]
+        if (!myFile) { return }
+        let data = new FormData();
+        data.append("document", myFile, myFile.name);
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                var response = JSON.parse(this.responseText);
+                let valueContainer = document.getElementById('valuecontainer');
+                let catContainer = document.getElementById('catcontainer');
+                let value = response['document']['inference']['pages'][0]['prediction']['total_amount']['value'];
+                let cat = response['document']['inference']['pages'][0]['prediction']['category']['value'];
+                console.log(response)
+                console.log(value);
+                valueContainer.textContent = "the value is: " + value
+                catContainer.textContent = "the category is: " + cat
+             
+            }
+        });
+
+        xhr.open("POST", "https://api.mindee.net/v1/products/mindee/expense_receipts/v5/predict");
+        xhr.setRequestHeader("Authorization", "172fd464a10ab21e0332fda231215300");
+        xhr.send(data);
+    }
+</script>
     </main>
         </div>
     </div>
