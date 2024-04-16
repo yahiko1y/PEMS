@@ -1,6 +1,14 @@
+<?php 
+session_start();
+
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
+
+}else{
+     header("Location: index.php");
+     exit();
+}
+ ?>
 <?php
-
-
 include 'connectDB.php';
 
     // Fetch the data from the database
@@ -9,10 +17,6 @@ include 'connectDB.php';
 
     // Store the data in an array
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-  
-   
-  
 ?>
 
 <!DOCTYPE html>
@@ -38,18 +42,14 @@ include 'connectDB.php';
                 </button>
             </nav>
             <main class="content px-3 py-2">
-        <div class="container-fluid">
-            <div class="mb-3">
-                <h3>Add revenue</h3>
-            </div>
-        </div>
+     
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
                     <h1>Expense Form</h1>
                     <form action="do.php" method="post">
                     <div class="form-group">
-                        <label for="price">Name:</label>
+                        <label for="price">Expense:</label>
                         <input type="text" class="form-control" id="price" name="name" value="test" required>
                       </div>
                       <div class="form-group">
@@ -60,6 +60,13 @@ include 'connectDB.php';
                         <label for="date">Date:</label>
                         <input type="date" class="form-control" id="date" name="date" >
                       </div>
+                      <script>
+                        // Get the current date
+                        var currentDate = new Date().toISOString().split('T')[0];
+                        
+                        // Set the current date as the default value
+                        document.getElementById('date').value = currentDate;
+                        </script>
                       <div class="form-group">
                           Add to reccuring expense: <input type="checkbox" name="r" value=1 default=0> 
                         </div>
@@ -83,34 +90,44 @@ include 'connectDB.php';
                         </div>
                        
                       </div>
-                      <input type="submit" class="btn btn-primary">
+                      <input type="submit" class="btn btn-secondary">
                     </form>
                 </div>
                 <div class="col-md-6">
-                    <h1>reccuring expenses</h1>
-                    <h1>Data Table</h1>
-    <table>
+                <div class="card">
+  <div class="card-body">
+    <h1>Recurring Expenses Data Table</h1>
+    <table class="table">
+      <thead>
         <tr>
-            
-            <th>Name</th>
-            <th>Price</th>
-            <th>Expense Type</th>
+          <th>Expense</th>
+          <th>Price</th>
+          <th>Expense Type</th>
+          <th colspan = '2'>Action</th>
         </tr>
+      </thead>
+      <tbody>
         <?php
         // Iterate over the rows and display the data in the table
         if (!empty($rows)) {
-            foreach ($rows as $row) {
-                echo "<tr>";
-                echo "<td>" . $row["exp"] . "</td>";
-                echo "<td>" . $row["price"] . "</td>";
-                echo "<td>" . $row["exp_type"] . "</td>";
-                echo "</tr>";
-            }
+          foreach ($rows as $row) {
+            echo "<tr>";
+            echo "<td>" . $row["exp"] . "</td>";
+            echo "<td>" . $row["price"] . "</td>";
+            echo "<td>" . $row["exp_type"] . "</td>";
+            echo "<td><a class='btn btn-danger' href='actions/reccurring.php?id=" . $row['exp_id'] . "'>Add</a></td>";
+            echo "<td><a class='btn btn-danger' href='actions/reccurring.php?id=" . $row['exp_id'] . "'>remove</a></td>";
+
+            echo "</tr>";
+          }
         } else {
-            echo "<tr><td colspan='6'>No data available</td></tr>";
+          echo "<tr><td colspan='4'>No data available</td></tr>";
         }
         ?>
+      </tbody>
     </table>
+  </div>
+</div>
                 </div>
             </div>
         </div>

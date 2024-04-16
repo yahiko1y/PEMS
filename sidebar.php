@@ -25,7 +25,11 @@
                             <a href="addRevenue.php" class="sidebar-link"><i class="fas fa-file-invoice-dollar pe-2"></i>Revenue</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="reports.php" class="sidebar-link"><i class="fa-solid fa-file pe-2"></i>Reports</a>
+                            <a href="addExpense.php" class="sidebar-link"><i class="fa-solid fa-history pe-2"></i>Transtions</a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="reports.php" class="sidebar-link"><i class="fa-solid fa-area-chart pe-2"></i>Reports</a>
                         </li>
                   
                 

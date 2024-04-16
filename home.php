@@ -2,7 +2,10 @@
 session_start();
 
 if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
-
+}else{
+    header("Location: index.php");
+    exit();
+}
  ?>
 
 <!DOCTYPE html>
@@ -43,8 +46,5 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
 </html>
 
 <?php 
-}else{
-     header("Location: index.php");
-     exit();
-}
+
  ?>

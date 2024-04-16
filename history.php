@@ -1,13 +1,3 @@
-<?php 
-session_start();
-
-if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
-}else{
-    header("Location: index.php");
-    exit();
-}
- ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,11 +16,11 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
             <main class="content px-3 py-2">
                 <div class="container-fluid">
                     <div class="mb-3">
-                        <h3>Add Revenue</h3>
+                        <h3>Transtions</h3>
                     </div>
                 </div>
                 <div class="container rev">
-                    <h1>Revenue</h1>
+                    <h1>Transtions</h1>
                     
                   </div>
             </main>
