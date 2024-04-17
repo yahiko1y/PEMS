@@ -1,7 +1,7 @@
 <?php
 
 
-include 'connectDB.php';
+include '../connectDB.php';
 
 $user=1;
 $name = $_POST['name'];
@@ -23,7 +23,7 @@ $stmt->execute();
 echo"Data Added succefully ";
 
 echo "<script>";
-echo "setTimeout(function(){ window.location.href = 'addExpense.php' }, 1500);"; 
+echo "setTimeout(function(){ window.location.href = '../addExpense.php' }, 1500);"; 
 echo "</script>";
 ?>
 

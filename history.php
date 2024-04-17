@@ -1,3 +1,24 @@
+<?php 
+session_start();
+
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
+
+}else{
+     header("Location: index.php");
+     exit();
+}
+ ?>
+<?php
+include 'connectDB.php';
+
+    // Fetch the data from the database
+    $sql = "SELECT * FROM `expense` where user_id = $_SESSION[user_id]";
+    $stmt = $conn->query($sql);
+
+    // Store the data in an array
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,8 +41,39 @@
                     </div>
                 </div>
                 <div class="container rev">
-                    <h1>Transtions</h1>
-                    
+            
+                    <div class="card-body">
+    <h1>transactions history</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Expense</th>
+          <th>Price</th>
+          <th>Expense Type</th>
+          <th colspan = '2'>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        // Iterate over the rows and display the data in the table
+        if (!empty($rows)) {
+          foreach ($rows as $row) {
+            echo "<tr>";
+            echo "<td>" . $row["exp"] . "</td>";
+            echo "<td>" . $row["price"] . "</td>";
+            echo "<td>" . $row["exp_type"] . "</td>";
+            echo "<td><a class='btn btn-danger' href='actions/reccurring.php?id=" . $row['exp_id'] . "'>Add</a></td>";
+            echo "<td><a class='btn btn-danger' href='actions/removeRec.php?id=" . $row['exp_id'] . "'>remove</a></td>";
+
+            echo "</tr>";
+          }
+        } else {
+          echo "<tr><td colspan='4'>No data available</td></tr>";
+        }
+        ?>
+      </tbody>
+    </table>
+  </div>
                   </div>
             </main>
         </div>

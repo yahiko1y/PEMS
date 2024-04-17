@@ -47,7 +47,7 @@ include 'connectDB.php';
             <div class="row">
                 <div class="col-md-6">
                     <h1>Expense Form</h1>
-                    <form action="do.php" method="post">
+                    <form action="actions/do.php" method="post">
                     <div class="form-group">
                         <label for="price">Expense:</label>
                         <input type="text" class="form-control" id="price" name="name" value="test" required>
