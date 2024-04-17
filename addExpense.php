@@ -116,7 +116,7 @@ include 'connectDB.php';
             echo "<td>" . $row["price"] . "</td>";
             echo "<td>" . $row["exp_type"] . "</td>";
             echo "<td><a class='btn btn-danger' href='actions/reccurring.php?id=" . $row['exp_id'] . "'>Add</a></td>";
-            echo "<td><a class='btn btn-danger' href='actions/reccurring.php?id=" . $row['exp_id'] . "'>remove</a></td>";
+            echo "<td><a class='btn btn-danger' href='actions/removeRec.php?id=" . $row['exp_id'] . "'>remove</a></td>";
 
             echo "</tr>";
           }
