@@ -88,7 +88,7 @@ a:hover{
 </head>
 <body>
      <form action="create.php" method="post">
-     	<h2>LOGIN</h2>
+     	<h2>Register</h2>
      	<?php if (isset($_GET['error'])) { ?>
      		<p class="error"><?php echo $_GET['error']; ?></p>
      	<?php } ?>
