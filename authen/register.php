@@ -87,19 +87,20 @@ a:hover{
 	</style>
 </head>
 <body>
-     <form action="authen/login.php" method="post">
+     <form action="create.php" method="post">
      	<h2>LOGIN</h2>
      	<?php if (isset($_GET['error'])) { ?>
      		<p class="error"><?php echo $_GET['error']; ?></p>
      	<?php } ?>
-     	<label>Email</label>
-     	<input type="text" name="uname" placeholder="User Name"><br>
-
+         <label>Email</label>
+     	<input type="email" name="email" placeholder="Email" require><br>
      	<label>User Name</label>
-     	<input type="password" name="password" placeholder="Password"><br>
+     	<input type="text" name="uname" placeholder="User Name" require><br>
 
-     	<button type="submit">Login</button>
-		 <a href="authen/register.php" >register</a>
+     	<label>Password</label>
+     	<input type="password" name="password" placeholder="Password" require><br>
+
+     	<button type="submit">Register</button>
      </form>
 </body>
 </html>
