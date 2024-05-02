@@ -31,7 +31,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
                 </div>
                 <div class="container rev">
                     <h1>Revenue</h1>
-                    
+                  
                   </div>
             </main>
         </div>

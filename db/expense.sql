@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2024 at 06:05 AM
+-- Generation Time: May 01, 2024 at 07:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,12 +43,14 @@ CREATE TABLE `expense` (
 --
 
 INSERT INTO `expense` (`user_id`, `exp_id`, `exp`, `price`, `is_recurring`, `Purchase_date`, `time_stamp`, `exp_type`) VALUES
-(1, 18, 'canbuulo', 213, 0, '2024-03-01', '2024-03-31 03:53:32', 'food'),
-(1, 19, 'bariis', 321, 0, '2024-03-01', '2024-03-31 03:53:46', 'food'),
-(1, 20, 'filin', 12, 0, '2024-03-01', '2024-03-31 03:53:56', 'entertainment'),
-(1, 21, 'movie', 23, 0, '2024-03-01', '2024-03-31 03:54:07', 'entertainment'),
-(1, 22, 'rent', 238, 0, '2024-03-01', '2024-03-31 03:54:16', 'housing'),
-(1, 23, 'cleaning', 234, 0, '2024-03-01', '2024-03-31 03:54:35', 'housing');
+(11, 36, 'pizza', 21, 0, '2024-04-26', '2024-04-26 12:57:34', 'food'),
+(11, 37, 'weqwerwe', 213, 0, '2024-04-26', '2024-04-26 13:04:00', 'entertainment'),
+(11, 38, 'test', 2132, 0, '2024-04-26', '2024-04-26 13:04:38', 'livelihood'),
+(12, 39, 'test', 21, 0, '2024-04-26', '2024-04-26 13:18:21', 'food'),
+(11, 40, 'test', 21, 0, '2024-05-01', '2024-05-01 05:28:07', 'food'),
+(11, 41, 'pizza', 21, 1, '2024-05-01', '2024-05-01 05:40:31', 'food'),
+(11, 42, 'coco', 21, 1, '2024-05-01', '2024-05-01 05:41:15', 'food'),
+(11, 43, 'test', 21, 1, '2024-05-01', '2024-05-01 05:41:27', 'food');
 
 --
 -- Indexes for dumped tables
@@ -68,7 +70,7 @@ ALTER TABLE `expense`
 -- AUTO_INCREMENT for table `expense`
 --
 ALTER TABLE `expense`
-  MODIFY `exp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `exp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

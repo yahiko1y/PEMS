@@ -21,9 +21,7 @@
                         <li class="sidebar-item">
                             <a href="addExpense.php" class="sidebar-link"><i class="fa-solid fa-receipt pe-2"></i>Expenses</a>
                         </li>
-                        <li class="sidebar-item">
-                            <a href="addRevenue.php" class="sidebar-link"><i class="fas fa-file-invoice-dollar pe-2"></i>Revenue</a>
-                        </li>
+                       
                         <li class="sidebar-item">
                             <a href="history.php" class="sidebar-link"><i class="fa-solid fa-history pe-2"></i>transactions</a>
                         </li>

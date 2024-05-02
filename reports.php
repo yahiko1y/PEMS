@@ -17,17 +17,15 @@ include 'connectDB.php';
     // Fetch the data from the database
     $sql = "SELECT DISTINCT exp_type FROM expense";
     $stmt = $conn->query($sql);
-
+    $user= $_SESSION['user_id'];
     // Store the data in an array
     $dis = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $sql2= "SELECT exp_type, SUM(price) AS total FROM expense GROUP BY exp_type; ";
-
-    $stmt2 = $conn->query($sql2);
-
+    $stmt2 = $conn->prepare("SELECT exp_type, SUM(price) AS total FROM expense WHERE user_id = :user GROUP BY exp_type;");
+    $stmt2->bindParam(':user', $user);
+    $stmt2->execute();
+    
     // Store the data in an array
     $exp = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-   
   
 ?>
 

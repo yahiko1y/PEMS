@@ -9,7 +9,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    background-color: #ab47;
+
     
 }
 
@@ -81,7 +81,7 @@ nav .btn:hover{
     width: 100%;
     overflow: hidden;
     transition: all 0.35s ease-in-out;
-    background-color: #ab47;
+    background-color: white;
 }
 
 .sidebar-logo {

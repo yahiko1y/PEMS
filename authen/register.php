@@ -101,6 +101,7 @@ a:hover{
      	<input type="password" name="password" placeholder="Password" require><br>
 
      	<button type="submit">Register</button>
+		 <a href="../index.php" >I already have an account</a>
      </form>
 </body>
 </html>

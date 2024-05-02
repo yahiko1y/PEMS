@@ -31,6 +31,8 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
                 </div>
                 <div class="container">
                     <h1>HOME</h1>
+
+                   
                  
                   </div>
             </main>

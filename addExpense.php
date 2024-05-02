@@ -17,6 +17,11 @@ include 'connectDB.php';
 
     // Store the data in an array
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql2 = "SELECT * FROM `category`";
+    $stmt2 = $conn->query($sql2);
+    $rows2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+    
 ?>
 
 <!DOCTYPE html>
@@ -44,17 +49,18 @@ include 'connectDB.php';
             <main class="content px-3 py-2">
      
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row" >
+                <div class="col-md-6 card-body">
                     <h1>Expense Form</h1>
                     <form action="actions/do.php" method="post">
                     <div class="form-group">
                         <label for="price">Expense:</label>
-                        <input type="text" class="form-control" id="price" name="name" value="test" required>
+                        <input type="text" class="form-control" id="name" name="name" value="test" required>
                       </div>
                       <div class="form-group">
                         <label for="price">Price:</label>
-                        <input type="number" class="form-control" id="price" name="price" value=21 required>
+                        <input type="text" class="form-control" id="price" name="price"  min="0" 
+        max="100000000" step="0.01" value=21 required>
                       </div>
                       <div class="form-group">
                         <label for="date">Date:</label>
@@ -72,23 +78,20 @@ include 'connectDB.php';
                         </div>
                       <div class="form-group">
                         <label>Expense Type:</label>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="expenseType" id="food" value="food" required>
-                          <label class="form-check-label" for="food">Food</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="expenseType" id="entertainment" value="entertainment" required>
-                          <label class="form-check-label" for="entertainment">Entertainment</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="expenseType" id="housing" value="housing" required>
-                          <label class="form-check-label" for="housing">Housing/Rent</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="expenseType" id="livelihood" value="livelihood" required>
-                          <label class="form-check-label" for="livelihood">Livelihood</label>
-                        </div>
-                       
+                        <select id="exptype" name="exptype">
+                        <option disabled selected>Select type</option> 
+                        <?php
+                        if (!empty($rows2)) {
+                          foreach ($rows2 as $row2) {
+                        
+                            echo '<option value="' . $row2['categoryID'] . '">' . $row2['categoryName'] . '</option>';
+                            
+                          }
+                        } else {
+                          echo '<option value="no data">no data</option>';
+                        }
+                        ?>
+                       </select>
                       </div>
                       <input type="submit" class="btn btn-secondary">
                     </form>
@@ -128,16 +131,21 @@ include 'connectDB.php';
     </table>
   </div>
 </div>
-                </div>
+           </div>
             </div>
-        </div>
+        
 
+        <!-- new part -->
+
+        
+        <div class="row" style = "margin-top: 20px;">
+                <div class="col-md-6">
+                  <h2>Enter a reciept here</h2>
         <form onsubmit="mindeeSubmit(event)" >
     <input type="file" id="my-file-input" name="file" />
     <input type="submit" />
 </form>
-<div id="valuecontainer"></div>
-<div id="catcontainer"></div>
+<div id="ready"></div>
 <script type="text/javascript">
 
     const mindeeSubmit = (evt) => {
@@ -153,14 +161,21 @@ include 'connectDB.php';
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 var response = JSON.parse(this.responseText);
-                let valueContainer = document.getElementById('valuecontainer');
-                let catContainer = document.getElementById('catcontainer');
+            
+                let name = document.getElementById('name');
+                let ready = document.getElementById('ready');
+                let price = document.getElementById('price');
+               
                 let value = response['document']['inference']['pages'][0]['prediction']['total_amount']['value'];
                 let cat = response['document']['inference']['pages'][0]['prediction']['category']['value'];
                 console.log(response)
                 console.log(value);
-                valueContainer.textContent = "the value is: " + value
-                catContainer.textContent = "the category is: " + cat
+
+                name.value= cat;
+                price.value = value;
+                ready.textContent = "data added to Expense form above";
+
+               
              
             }
         });
@@ -170,9 +185,22 @@ include 'connectDB.php';
         xhr.send(data);
     }
 </script>
+</div>
+        
+        <div class="col-md-6 card-body">
+                    <h2>Add a category</h2>
+                    <form action="actions/do.php" method="post">
+                    <div class="form-group">
+                        <label for="price">Expense:</label>
+                        <input type="text" class="form-control" id="price" name="name" value="test" required>
+                      </div>
+        <input type="submit" class="btn btn-secondary">
+                    </form>
+                    </div>
+                  </div>
     </main>
         </div>
-    </div>
+  
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"

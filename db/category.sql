@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2024 at 07:51 PM
+-- Generation Time: May 01, 2024 at 06:47 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,43 +24,42 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `category`
 --
 
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `user_name` varchar(255) NOT NULL,
-  `password_` varchar(255) NOT NULL
+CREATE TABLE `category` (
+  `categoryID` int(11) NOT NULL,
+  `categoryName` varchar(255) NOT NULL,
+  `added time` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `category`
 --
 
-INSERT INTO `users` (`user_id`, `email`, `user_name`, `password_`) VALUES
-(11, 'Mwarsame922@gmail.com', 'test', '12345'),
-(12, 'abdullahi@gmail.com', 'abdull', '12345');
+INSERT INTO `category` (`categoryID`, `categoryName`, `added time`) VALUES
+(1, 'food', '2024-04-27'),
+(2, 'entertainment', '2024-04-27');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `users`
+-- Indexes for table `category`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`categoryID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table `category`
 --
-ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `category`
+  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
