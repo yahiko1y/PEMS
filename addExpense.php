@@ -2,15 +2,20 @@
 session_start();
 
 if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
+ 
 
 }else{
      header("Location: index.php");
      exit();
 }
+
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+  echo "<script>alert('Task completed successfully.');</script>";
+}
  ?>
 <?php
 include 'connectDB.php';
-
+$user= $_SESSION['user_id'];
     // Fetch the data from the database
     $sql = "SELECT * FROM `expense` where is_recurring = 1";
     $stmt = $conn->query($sql);
@@ -18,7 +23,7 @@ include 'connectDB.php';
     // Store the data in an array
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql2 = "SELECT * FROM `category`";
+    $sql2 = "SELECT * FROM `category` where `user_id`=1 or `user_id` =$user";
     $stmt2 = $conn->query($sql2);
     $rows2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     
@@ -55,12 +60,12 @@ include 'connectDB.php';
                     <form action="actions/do.php" method="post">
                     <div class="form-group">
                         <label for="price">Expense:</label>
-                        <input type="text" class="form-control" id="name" name="name" value="test" required>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="enter the name of the expense" required>
                       </div>
                       <div class="form-group">
                         <label for="price">Price:</label>
                         <input type="text" class="form-control" id="price" name="price"  min="0" 
-        max="100000000" step="0.01" value=21 required>
+        max="100000000" step="0.01" placeholder="Enter the price" required>
                       </div>
                       <div class="form-group">
                         <label for="date">Date:</label>
@@ -77,7 +82,7 @@ include 'connectDB.php';
                           Add to reccuring expense: <input type="checkbox" name="r" value=1 default=0> 
                         </div>
                       <div class="form-group">
-                        <label>Expense Type:</label>
+                        <label>Category:</label>
                         <select id="exptype" name="exptype">
                         <option disabled selected>Select type</option> 
                         <?php
@@ -189,10 +194,10 @@ include 'connectDB.php';
         
         <div class="col-md-6 card-body">
                     <h2>Add a category</h2>
-                    <form action="actions/do.php" method="post">
+                    <form action="actions/addcat.php" method="post">
                     <div class="form-group">
-                        <label for="price">Expense:</label>
-                        <input type="text" class="form-control" id="price" name="name" value="test" required>
+                        <label for="price">Category:</label>
+                        <input type="text" class="form-control" id="category" name="cat" placeholder="example: food" required>
                       </div>
         <input type="submit" class="btn btn-secondary">
                     </form>

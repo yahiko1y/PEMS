@@ -28,10 +28,8 @@ $stmt->bindParam(':d', $date);
 $stmt->bindParam(':x', $expenseType);
 
 $stmt->execute();
-echo"Data Added succefully ";
+header("Location: ../addexpense.php?success=1");
+exit();
 
-echo "<script>";
-echo "setTimeout(function(){ window.location.href = '../addExpense.php' }, 1500);"; 
-echo "</script>";
 ?>
 

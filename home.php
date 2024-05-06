@@ -2,6 +2,8 @@
 session_start();
 
 if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
+    header("Location: addexpense.php");
+    exit();
 }else{
     header("Location: index.php");
     exit();

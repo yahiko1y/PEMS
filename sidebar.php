@@ -11,12 +11,12 @@
                 <li class="sidebar-header">
                     Tools & Components
                 </li>
-                <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                     <a href="connectDB.php" class="sidebar-link">
                         <i class="fa-solid fa-list pe-2"></i>
                         databse check
                     </a>
-                </li>
+                </li> -->
                 
                         <li class="sidebar-item">
                             <a href="addExpense.php" class="sidebar-link"><i class="fa-solid fa-receipt pe-2"></i>Expenses</a>

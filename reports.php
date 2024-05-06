@@ -20,13 +20,16 @@ include 'connectDB.php';
     $user= $_SESSION['user_id'];
     // Store the data in an array
     $dis = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $stmt2 = $conn->prepare("SELECT exp_type, SUM(price) AS total FROM expense WHERE user_id = :user GROUP BY exp_type;");
+    $stmt2 = $conn->prepare("SELECT SUM(price) AS total, categoryName AS exp_type FROM `expense` JOIN `category` ON expense.exp_type = category.categoryID WHERE expense.user_id = :user GROUP BY categoryName;");
     $stmt2->bindParam(':user', $user);
     $stmt2->execute();
-    
+   
+    $stmt3 = $conn->prepare("SELECT SUM(price) AS total, categoryName AS exp_type FROM `expense` JOIN `category` ON expense.exp_type = category.categoryID WHERE expense.user_id = :user AND (Purchase_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)) GROUP BY categoryName;");
+    $stmt3->bindParam(':user', $user);
+    $stmt3->execute();
     // Store the data in an array
     $exp = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-  
+    $date1 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -67,7 +70,13 @@ include 'connectDB.php';
   <div class="chart-container" style="position: relative; height:50vh; width:100vw">
     <canvas id="myChart"></canvas>
   </div>
+
 </div>
+
+<div class="chart-container" style="position: relative; height:50vh; width:100vw" >
+    
+    <canvas id="myChart2"></canvas>
+  </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -75,8 +84,18 @@ include 'connectDB.php';
 
 let type =[]
 let total = []
+let type2 =[]
+let total2 = []
 
             // Make an AJAX request to fetch_data.php
+            var date1 = <?php echo json_encode($date1); ?>;
+            date1.forEach(function (params) {
+              console.log(params.exp_type)
+              type2.push(params.exp_type)
+              total2.push(params.total)
+
+            })
+            console.log(date1);
             var exp = <?php echo json_encode($exp); ?>;
             exp.forEach(function (params) {
               console.log(params.exp_type)
@@ -121,11 +140,46 @@ let total = []
       }
     }
   });
+
+
+
+  const ctx2 = document.getElementById('myChart2');
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: type2,
+      datasets: [{
+        label: 'Last 30 days expenses',
+        data: total2,
+         backgroundColor: [
+      'rgba(255, 99, 132, 0.6)',
+      'rgba(255, 159, 64, 0.6)',
+      'rgba(255, 205, 86, 0.6)'
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)'
+    ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
                   </div>
+
+
+
             </main>
         </div>
     </div>
