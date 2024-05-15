@@ -173,8 +173,14 @@ $user= $_SESSION['user_id'];
                
                 let value = response['document']['inference']['pages'][0]['prediction']['total_amount']['value'];
                 let cat = response['document']['inference']['pages'][0]['prediction']['category']['value'];
+                let da= response['document']['inference']['prediction']['date']['value'];
                 console.log(response)
                 console.log(value);
+                if (da== null){
+                  console.log("its joever")
+                }else{
+                  document.getElementById('date').value = da;
+                }
 
                 name.value= cat;
                 price.value = value;

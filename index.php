@@ -84,6 +84,9 @@ a {
 a:hover{
 	opacity: .7;
 }
+.check{
+
+}
 	</style>
 </head>
 <body>
@@ -92,14 +95,30 @@ a:hover{
      	<?php if (isset($_GET['error'])) { ?>
      		<p class="error"><?php echo $_GET['error']; ?></p>
      	<?php } ?>
-     	<label>Email</label>
+     	<label>Username</label>
      	<input type="text" name="uname" placeholder="User Name"><br>
 
-     	<label>User Name</label>
-     	<input type="password" name="password" placeholder="Password"><br>
-
+     	<label>password</label>
+     	<input type="password" name="password" placeholder="Password" id ="password"><br>
+		<label for="">Show password</label>
+		 <input type="checkbox" onclick="myFunction()" id ="check">
+		 
      	<button type="submit">Login</button>
 		 <a href="authen/register.php" >register</a>
      </form>
+
+
+	 <script>
+
+		function myFunction() {
+		var x = document.getElementById("password");
+		if (x.type === "password") {
+			x.type = "text";
+		} else {
+			x.type = "password";
+		}
+		}
+
+	 </script>
 </body>
 </html>
