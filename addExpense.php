@@ -17,7 +17,7 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
 include 'connectDB.php';
 $user= $_SESSION['user_id'];
     // Fetch the data from the database
-    $sql = "SELECT * FROM `expense` where is_recurring = 1";
+    $sql = "SELECT expense.user_id,exp, exp_id, categoryName, Purchase_date, price FROM `expense` JOIN `category` ON expense.exp_type = category.categoryID WHERE expense.user_id = $_SESSION[user_id] and is_recurring = 1;";
     $stmt = $conn->query($sql);
 
     // Store the data in an array
@@ -83,7 +83,7 @@ $user= $_SESSION['user_id'];
                         </div>
                       <div class="form-group">
                         <label>Category:</label>
-                        <select id="exptype" name="exptype">
+                        <select id="exptype" name="exptype" required>
                         <option disabled selected>Select type</option> 
                         <?php
                         if (!empty($rows2)) {
@@ -104,7 +104,7 @@ $user= $_SESSION['user_id'];
                 <div class="col-md-6">
                 <div class="card">
   <div class="card-body">
-    <h1>Recurring Expenses Data Table</h1>
+    <h1>Recurring Expenses</h1>
     <table class="table">
       <thead>
         <tr>
@@ -122,7 +122,7 @@ $user= $_SESSION['user_id'];
             echo "<tr>";
             echo "<td>" . $row["exp"] . "</td>";
             echo "<td>" . $row["price"] . "</td>";
-            echo "<td>" . $row["exp_type"] . "</td>";
+            echo "<td>" . $row["categoryName"] . "</td>";
             echo "<td><a class='btn btn-danger' href='actions/reccurring.php?id=" . $row['exp_id'] . "'>Add</a></td>";
             echo "<td><a class='btn btn-danger' href='actions/removeRec.php?id=" . $row['exp_id'] . "'>remove</a></td>";
 
